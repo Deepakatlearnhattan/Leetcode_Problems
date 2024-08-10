@@ -15,3 +15,9 @@ class Solution:
         
         return second
 
+//Examples:-
+solution = Solution()
+print(solution.climbStairs(2))  # Output: 2
+print(solution.climbStairs(3))  # Output: 3
+print(solution.climbStairs(4))  # Output: 5
+print(solution.climbStairs(5))  # Output: 8
