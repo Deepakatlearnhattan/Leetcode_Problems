@@ -1,0 +1,21 @@
+class TreeNode:
+    def __init__(self, val=0, left=None, right=None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    def isSymmetric(self, root: TreeNode) -> bool:
+        # Helper function to compare two subtrees for mirror symmetry
+        def isMirror(left: TreeNode, right: TreeNode) -> bool:
+            # If both subtrees are empty, they are symmetric
+            if not left and not right:
+                return True
+            # If one subtree is empty or their values are not equal, they are not symmetric
+            if not left or not right or left.val != right.val:
+                return False
+            # Recursively compare the opposite subtrees
+            return isMirror(left.left, right.right) and isMirror(left.right, right.left)
+        
+        # Start the recursion with the root's left and right children
+        return isMirror(root.left, root.right) if root else True
