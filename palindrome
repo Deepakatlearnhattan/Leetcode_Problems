@@ -1,0 +1,15 @@
+class Solution:
+    def isPalindrome(self, s: str) -> bool:
+        # Filter out non-alphanumeric characters and convert to lowercase
+        filtered_s = ''.join(char.lower() for char in s if char.isalnum())
+        
+        # Check if the filtered string is equal to its reverse
+        return filtered_s == filtered_s[::-1]
+
+# Example usage:
+solution = Solution()
+s = "A man, a plan, a canal: Panama"
+print(solution.isPalindrome(s))  # Output: True
+
+s = "race a car"
+print(solution.isPalindrome(s))  # Output: False
