@@ -1,0 +1,24 @@
+from collections import Counter
+
+class Solution:
+    def longestPalindrome(self, s: str) -> int:
+        char_count = Counter(s)
+        length = 0
+        odd_found = False
+        
+        for count in char_count.values():
+            if count % 2 == 0:
+                length += count  # Use all characters if count is even
+            else:
+                length += count - 1  # Use all but one if count is odd
+                odd_found = True  # Remember that we found at least one odd count
+        
+        if odd_found:
+            length += 1  # Add one character in the center if there is any odd count
+        
+        return length
+
+# Example Usage
+if __name__ == "__main__":
+    solution = Solution()
+    print(solution.longestPalindrome("abccccdd"))  # Output: 7
