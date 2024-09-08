@@ -1,0 +1,28 @@
+class Solution:
+    def addStrings(self, num1: str, num2: str) -> str:
+        # Initialize pointers for num1 and num2, and a variable to hold carry
+        i, j = len(num1) - 1, len(num2) - 1
+        carry = 0
+        result = []
+
+        # Loop until both strings are fully processed or there is a carry left
+        while i >= 0 or j >= 0 or carry:
+            # Get the current digit from num1 and num2 or 0 if out of bounds
+            n1 = int(num1[i]) if i >= 0 else 0
+            n2 = int(num2[j]) if j >= 0 else 0
+
+            # Calculate the sum of the digits plus any carry
+            total = n1 + n2 + carry
+
+            # Update the carry for the next iteration
+            carry = total // 10
+
+            # Append the last digit of the sum to the result
+            result.append(str(total % 10))
+
+            # Move to the next digit in num1 and num2
+            i -= 1
+            j -= 1
+
+        # Reverse the result list and join to form the final string
+        return ''.join(result[::-1])
