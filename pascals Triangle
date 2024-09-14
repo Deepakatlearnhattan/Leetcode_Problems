@@ -1,0 +1,27 @@
+class Solution:
+    def generate(self, numRows: int) -> list:
+        triangle = []
+        
+        # Base case: if numRows is 0, return an empty list
+        if numRows == 0:
+            return triangle
+        
+        # First row is always [1]
+        triangle.append([1])
+        
+        # Generate each row from 2 to numRows
+        for i in range(1, numRows):
+            # Start the row with 1
+            row = [1]
+            # Previous row
+            prev_row = triangle[i - 1]
+            
+            # Calculate the values in between the first and last element
+            for j in range(1, i):
+                row.append(prev_row[j - 1] + prev_row[j])
+            
+            # End the row with 1
+            row.append(1)
+            triangle.append(row)
+        
+        return triangle
