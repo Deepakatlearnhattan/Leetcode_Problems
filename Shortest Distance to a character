@@ -1,0 +1,20 @@
+class Solution:
+    def shortestToChar(self, s: str, c: str) -> list[int]:
+        n = len(s)
+        answer = [float('inf')] * n  # Initialize all distances to infinity
+        pos = -float('inf')  # Initialize the position of `c` as negative infinity
+
+        # First pass (left to right)
+        for i in range(n):
+            if s[i] == c:
+                pos = i  # Update the position of `c`
+            answer[i] = abs(i - pos)  # Calculate the distance from the leftmost `c`
+
+        # Second pass (right to left)
+        pos = float('inf')  # Reinitialize the position of `c` as positive infinity
+        for i in range(n - 1, -1, -1):
+            if s[i] == c:
+                pos = i  # Update the position of `c`
+            answer[i] = min(answer[i], abs(i - pos))  # Calculate the minimum distance
+
+        return answer
