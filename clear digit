@@ -1,0 +1,35 @@
+class Solution:
+    def clearDigits(self, s: str) -> str:
+        # Convert the string to a list for easy manipulation
+        s_list = list(s)
+        
+        i = 0
+        while i < len(s_list):
+            # If we find a digit
+            if s_list[i].isdigit():
+                # Remove the digit
+                s_list.pop(i)
+                
+                # Find the closest non-digit character to its left, if it exists
+                j = i - 1
+                while j >= 0 and not s_list[j].isalpha():
+                    j -= 1
+                
+                # If we found a non-digit character, remove it
+                if j >= 0:
+                    s_list.pop(j)
+                
+                # Reset the index to start checking again
+                i = 0
+            else:
+                # Continue traversing the string
+                i += 1
+        
+        # Join the list back into a string and return the result
+        return ''.join(s_list)
+
+# Example usage:
+solution = Solution()
+s = "a1bc2d3e"
+result = solution.clearDigits(s)
+print(result)  # Output: "e"
