@@ -1,0 +1,23 @@
+class Solution:
+    def isIsomorphic(self, s: str, t: str) -> bool:
+        # Two dictionaries to store mappings
+        s_to_t = {}
+        t_to_s = {}
+        
+        # Iterate over the characters of s and t
+        for c1, c2 in zip(s, t):
+            # Check if there is an existing mapping from c1 to c2 in s_to_t
+            if c1 in s_to_t:
+                if s_to_t[c1] != c2:
+                    return False
+            # Check if there is an existing mapping from c2 to c1 in t_to_s
+            if c2 in t_to_s:
+                if t_to_s[c2] != c1:
+                    return False
+            
+            # Create the mapping in both dictionaries
+            s_to_t[c1] = c2
+            t_to_s[c2] = c1
+        
+        # If we complete the loop without contradictions, they are isomorphic
+        return True
