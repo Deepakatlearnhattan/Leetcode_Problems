@@ -1,0 +1,52 @@
+#include <stack>
+using namespace std;
+
+class MyQueue {
+private:
+    stack<int> stack1;
+    stack<int> stack2;
+
+public:
+    MyQueue() {
+        // Constructor: Initialize two empty stacks.
+    }
+    
+    // Push element x to the back of the queue.
+    void push(int x) {
+        stack1.push(x);
+    }
+    
+    // Remove the element from the front of the queue and return it.
+    int pop() {
+        if (stack2.empty()) {
+            // Transfer all elements from stack1 to stack2 if stack2 is empty.
+            while (!stack1.empty()) {
+                stack2.push(stack1.top());
+                stack1.pop();
+            }
+        }
+        // Pop the top element from stack2.
+        int front = stack2.top();
+        stack2.pop();
+        return front;
+    }
+    
+    // Get the front element.
+    int peek() {
+        if (stack2.empty()) {
+            // Transfer all elements from stack1 to stack2 if stack2 is empty.
+            while (!stack1.empty()) {
+                stack2.push(stack1.top());
+                stack1.pop();
+            }
+        }
+        // Return the top element from stack2.
+        return stack2.top();
+    }
+    
+    // Return whether the queue is empty.
+    bool empty() {
+        // The queue is empty only when both stacks are empty.
+        return stack1.empty() && stack2.empty();
+    }
+};
