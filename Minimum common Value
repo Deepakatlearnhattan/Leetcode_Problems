@@ -1,0 +1,43 @@
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    int getCommon(vector<int>& nums1, vector<int>& nums2) {
+        int i = 0, j = 0;
+        
+        // Traverse both arrays using two pointers
+        while (i < nums1.size() && j < nums2.size()) {
+            if (nums1[i] == nums2[j]) {
+                // Return the first common element
+                return nums1[i];
+            } else if (nums1[i] < nums2[j]) {
+                // Move the pointer in nums1 forward
+                i++;
+            } else {
+                // Move the pointer in nums2 forward
+                j++;
+            }
+        }
+        
+        // If no common element is found, return -1
+        return -1;
+    }
+};
+
+int main() {
+    Solution solution;
+
+    // Example 1
+    vector<int> nums1 = {1, 2, 3, 6};
+    vector<int> nums2 = {2, 4, 6, 8};
+    cout << "Common element: " << solution.getCommon(nums1, nums2) << endl;
+
+    // Example 2
+    vector<int> nums1 = {1, 2, 3, 5};
+    vector<int> nums2 = {6, 7, 8, 9};
+    cout << "Common element: " << solution.getCommon(nums1, nums2) << endl;
+
+    return 0;
+}
