@@ -1,0 +1,66 @@
+#include <iostream>
+using namespace std;
+
+// Definition for a binary tree node.
+struct TreeNode {
+    int val;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode(int x) : val(x), left(NULL), right(NULL) {}
+};
+
+class Solution {
+public:
+    TreeNode* searchBST(TreeNode* root, int val) {
+        // Base case: if root is NULL or the root's value matches val
+        if (root == NULL || root->val == val) {
+            return root;
+        }
+
+        // If the value we're searching for is less than the current node's value,
+        // search the left subtree.
+        if (val < root->val) {
+            return searchBST(root->left, val);
+        }
+
+        // Otherwise, search the right subtree.
+        return searchBST(root->right, val);
+    }
+};
+
+// Helper function to print the subtree rooted at a given node (pre-order traversal)
+void preOrder(TreeNode* node) {
+    if (node == NULL) {
+        return;
+    }
+
+    cout << node->val << " ";
+    preOrder(node->left);
+    preOrder(node->right);
+}
+
+int main() {
+    // Create a sample BST
+    TreeNode* root = new TreeNode(4);
+    root->left = new TreeNode(2);
+    root->right = new TreeNode(7);
+    root->left->left = new TreeNode(1);
+    root->left->right = new TreeNode(3);
+
+    Solution solution;
+    int val = 2;
+
+    // Search for the node with value `val` and return the subtree
+    TreeNode* result = solution.searchBST(root, val);
+
+    // Print the pre-order traversal of the result subtree
+    if (result != NULL) {
+        cout << "Subtree rooted at node with value " << val << ": ";
+        preOrder(result);
+        cout << endl;
+    } else {
+        cout << "Node with value " << val << " not found." << endl;
+    }
+
+    return 0;
+}
